@@ -1,11 +1,12 @@
+import CameraColorExtractor from 'components/CameraColorExtractor';
 import './global.css';
-import { View, Text } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { StatusBar } from 'react-native';
 
 export default function App() {
   return (
-    <View>
-      <Text className="font-bold text-green-500">Merda</Text>
-      <Text className="font-bold text-indigo-500">Merda</Text>
-    </View>
+    <SafeAreaView>
+      <CameraColorExtractor />
+    </SafeAreaView>
   );
 }
