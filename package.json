@@ -1,5 +1,5 @@
 {
-  "name": "my-expo-app",
+  "name": "camera-color-eye",
   "version": "1.0.0",
   "scripts": {
     "android": "expo start --android",
