@@ -1,13 +1,11 @@
-import { ScreenContent } from 'components/ScreenContent';
-import { StatusBar } from 'expo-status-bar';
-
 import './global.css';
+import { View, Text } from 'react-native';
 
 export default function App() {
   return (
-    <>
-      <ScreenContent title="Home" path="App.tsx"></ScreenContent>
-      <StatusBar style="auto" />
-    </>
+    <View>
+      <Text className="font-bold text-red-500">Merda</Text>
+      <Text className="font-bold text-indigo-500">Merda</Text>
+    </View>
   );
 }
