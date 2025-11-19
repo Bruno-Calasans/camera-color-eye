@@ -64,8 +64,8 @@ export default function CameraColorExtractor() {
   return (
     <View className="flex justify-center">
       {!preview && (
-        <View className="relative flex h-72 justify-end bg-blue-500">
-          <CameraView ref={cameraRef} style={{ flex: 1 }} facing="back" />
+        <View className="relative flex h-[100%] justify-end bg-blue-500">
+          <CameraView ref={cameraRef} style={{ flex: 1 }} facing="back" flash="auto" />
           <CameraOverlay width={TARGET_SIZE} height={TARGET_SIZE} />
           <Button title="Pegar cor" onPress={captureColor} />
         </View>
