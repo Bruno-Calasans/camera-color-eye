@@ -10,8 +10,8 @@ export default class ColorManager {
     return ColorManager.findColorByRGB(closestRGB)!;
   }
 
-  static hexColorToRGB(color: string): RGBColor {
-    const hexToRGB = convert.hex.rgb(color);
+  static hexColorToRGB(hex: string): RGBColor {
+    const hexToRGB = convert.hex.rgb(hex);
     const colorRGB = {
       R: hexToRGB[0],
       G: hexToRGB[1],
@@ -47,7 +47,6 @@ export default class ColorManager {
 
     COLORS.push({
       rgb,
-      hex,
       name,
       type,
       code,
@@ -65,10 +64,7 @@ export default class ColorManager {
     const color = COLORS.find((color) => color.code === code);
     if (!color) return;
 
-    if (rgb) {
-      color.rgb = rgb;
-      color.hex = convert.rgb.hex([rgb.R, rgb.G, rgb.B]);
-    }
+    if (rgb) color.rgb = rgb;
     if (type) color.type = type;
     if (compatibilityCode) color.compatibilityCode = compatibilityCode;
     if (name) color.name = name;

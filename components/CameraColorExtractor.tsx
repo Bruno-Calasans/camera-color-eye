@@ -7,12 +7,13 @@ import { useRef, useState } from 'react';
 import { ImageManipulator } from 'expo-image-manipulator';
 import ColorPreview from './ColorPreview';
 
-const TARGET_SIZE = 10;
+const TARGET_SIZE = 15;
 
 export default function CameraColorExtractor() {
   const cameraRef = useRef<CameraView>(null);
   const [permission, requestPermission] = useCameraPermissions();
   const [preview, setPreview] = useState<string | null>(null);
+  const [croppedImg, setCroppedImg] = useState<string | null>(null);
   const [mainColor, setMainColor] = useState<string | null>();
 
   const captureColor = async () => {
@@ -22,6 +23,7 @@ export default function CameraColorExtractor() {
     const photo = await cameraRef.current.takePictureAsync({
       quality: 1,
       base64: true,
+      skipProcessing: true,
     });
 
     setPreview(photo.uri);
@@ -40,6 +42,8 @@ export default function CameraColorExtractor() {
     const resultImg = await croppedImg.saveAsync({
       base64: true,
     });
+
+    setCroppedImg(resultImg.uri);
 
     const foundColor = await getMainColor('data:image/jpg;base64,' + resultImg.base64);
     setMainColor(foundColor);
@@ -65,24 +69,26 @@ export default function CameraColorExtractor() {
     <View className="flex justify-center">
       {!preview && (
         <View className="relative flex h-[100%] justify-end bg-blue-500">
-          <CameraView ref={cameraRef} style={{ flex: 1 }} facing="back" flash="auto" />
+          <CameraView
+            ref={cameraRef}
+            style={{ flex: 1, width: '100%', height: '100%' }}
+            facing="back"
+            flash="auto"
+          />
           <CameraOverlay width={TARGET_SIZE} height={TARGET_SIZE} />
           <Button title="Pegar cor" onPress={captureColor} />
         </View>
       )}
 
-      {preview && (
+      {preview && croppedImg && (
         <View className="flex-col gap-2">
           <ImagePreview uri={preview} />
+          <ImagePreview uri={croppedImg} />
           <Button title="Tirar novamente" onPress={reset} />
         </View>
       )}
 
-      {mainColor && (
-        <View>
-          <ColorPreview color={mainColor} />
-        </View>
-      )}
+      {mainColor && <ColorPreview color={mainColor} />}
     </View>
   );
 }

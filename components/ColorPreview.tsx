@@ -7,8 +7,8 @@ type ColorPreviewProps = {
 };
 
 export default function ColorPreview({ color }: ColorPreviewProps) {
-  console.log(ColorManager.getClosestColor(color));
-  console.log(ColorManager.getNClosestColors(color, 2));
+  console.log(ColorManager.getClosestColor(color).code);
+  console.log(ColorManager.getNClosestColors(color, 2).map((c) => c.code));
 
   return (
     <View
