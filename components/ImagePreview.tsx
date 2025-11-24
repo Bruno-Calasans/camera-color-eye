@@ -8,5 +8,11 @@ type ImagePreviewProps = {
 };
 
 export default function ImagePreview({ uri, width, height }: ImagePreviewProps) {
-  return <Image source={{ uri }} className={cn('h-32 w-32 border-2 border-emerald-500')} />;
+  return (
+    <Image
+      source={{ uri }}
+      resizeMode="contain"
+      className={cn('h-64 w-full border-2 border-emerald-500')}
+    />
+  );
 }

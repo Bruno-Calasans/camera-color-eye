@@ -9,7 +9,9 @@ type CameraOverlayProps = {
 
 export default function CameraOverlay({ width, height }: CameraOverlayProps) {
   return (
-    <View className="absolute inset-0 items-center justify-center" pointerEvents="none">
+    <View
+      className="bg-red absolute bottom-0 left-0 right-0 top-0 items-center justify-center"
+      pointerEvents="none">
       <View
         style={{
           width,
